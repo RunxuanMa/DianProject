@@ -7,4 +7,7 @@
 
 在target目录中找到jar包(名字为maven_springboot-0.0.1-SNAPSHOT.jar)
 
+在你的MySQL中，创建一个 名为 excel 的数据库
+
+
 进入jar所在的文件夹，使用java -jar命令运行jar，项目就能启动(自行配置环境)
