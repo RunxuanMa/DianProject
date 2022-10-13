@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件</title>
+    <style>
+        .show-img{
+            display: inline-block;
+            width: 200px;
+            height:200px;
+        }
+    </style>
+</head>
+<body>
+<h1>form表单上传文件(written by 马rx)</h1><hr>
+<form action="/Excel" method="POST" enctype="multipart/form-data" >
+    <p>文件：<input type="file" name="file" ></p>
+    <p><input type="submit" value="提交"></p>
+</form>
+
+</body>
+
+</html>

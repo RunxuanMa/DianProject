@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>下载文件</title>
+<script type="text/javascript" >
+    function getUrl(){
+       document.getElementById('myaction').value+=document.getElementById('filename').value
+    }
+
+</script>
+</head>
+<body>
+<h1>form表单下载文件(written by 马rx)</h1><hr>
+<table align="center" border="1px" cellspacing="0" cellpadding="10px">
+    <thead>
+    <tr>
+        <th>文件名</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="str:${table}">
+        <td th:text="${str}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<form action="/Excel" method="get" id="myaction" >
+    <input type="text" name="filename" >
+    <input type="submit">
+</form>
+
+
+</body>
+
+</html>
