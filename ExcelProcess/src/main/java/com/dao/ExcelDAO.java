@@ -64,56 +64,9 @@ public class ExcelDAO {
 
 
         jdbcTemplate.update(createTableSql);
+        String exceptionStr=wrongDataProcess(excelData);
 
 
-        int[][]toLargeData=new int[6][excelData.length];
-        int[][]nullData=new int[6][excelData.length];
-        StringBuilder exceptionStr = new StringBuilder();
-        for (int i=0;i<excelData.length;i++) {
-            Object[] excelDatum = excelData[i];
-
-            if (excelDatum[0] != null && ((String) excelDatum[0]).length() > 32) {
-                toLargeData[1][i] = 1;
-            }
-            if (excelDatum[1] != null && ((String) excelDatum[1]).length() > 32) {
-                toLargeData[2][i] = 1;
-            }
-            if (excelDatum[4] != null && ((String) excelDatum[4]).length() > 32) {
-                toLargeData[5][i] = 1;
-            }
-
-            if (excelDatum[0]==null||excelDatum[0] == "") {
-                nullData[1][i]=1;
-            }
-            if (excelDatum[1]==null||excelDatum[1] == "") {
-                nullData[2][i]=1;
-            }
-            if (excelDatum[2]==null||excelDatum[2] == "") {
-                nullData[3][i]=1;
-            }
-
-
-
-        }
-        for (int k = 1; k <= 3; k++) {
-
-                for (int j = 0; j < excelData.length; j++) {
-
-                    if (nullData[k][j]==1) {
-                        exceptionStr.append("文件的第").append(k).append("列").append("第").append(1+j).append("行为空,这是必填项!\n");
-                    }
-                }
-
-        }
-
-        for (int k = 1; k < 6; k++) {
-            for (int j = 0; j < excelData.length; j++) {
-                if (toLargeData[k][j] == 1) {
-                    exceptionStr.append("文件的第").append(k).append("列").append("第").append(j+1).append("行数据过大!\n");
-                }
-
-            }
-        }
         for (int i=0;i<excelData.length;i++) {
             Object[] excelDatum = excelData[i];
             try {
@@ -144,6 +97,60 @@ public class ExcelDAO {
                 throw new RuntimeException(exceptionStr.toString());
             }
 
+        }
+
+        public String wrongDataProcess(Object[][] excelData ){
+            int[][]toLargeData=new int[6][excelData.length];
+            int[][]nullData=new int[6][excelData.length];
+            StringBuilder exceptionStr = new StringBuilder();
+            for (int i=0;i<excelData.length;i++) {
+                Object[] excelDatum = excelData[i];
+
+                if (excelDatum[0] != null && ((String) excelDatum[0]).length() > 32) {
+                    toLargeData[1][i] = 1;
+                }
+                if (excelDatum[1] != null && ((String) excelDatum[1]).length() > 32) {
+                    toLargeData[2][i] = 1;
+                }
+                if (excelDatum[4] != null && ((String) excelDatum[4]).length() > 32) {
+                    toLargeData[5][i] = 1;
+                }
+
+                if (excelDatum[0]==null||excelDatum[0] == "") {
+                    nullData[1][i]=1;
+                }
+                if (excelDatum[1]==null||excelDatum[1] == "") {
+                    nullData[2][i]=1;
+                }
+                if (excelDatum[2]==null||excelDatum[2] == "") {
+                    nullData[3][i]=1;
+                }
+
+
+
+            }
+            for (int k = 1; k <= 3; k++) {
+
+                for (int j = 0; j < excelData.length; j++) {
+
+                    if (nullData[k][j]==1) {
+                        exceptionStr.append("文件的第").append(k).append("列").append("第").append(1+j).append("行为空,这是必填项!\n");
+                    }
+                }
+
+            }
+
+            for (int k = 1; k < 6; k++) {
+                for (int j = 0; j < excelData.length; j++) {
+                    if (toLargeData[k][j] == 1) {
+                        exceptionStr.append("文件的第").append(k).append("列").append("第").append(j+1).append("行数据过大!\n");
+                    }
+
+                }
+            }
+
+
+            return new String(exceptionStr);
         }
 
 
@@ -207,3 +214,6 @@ public class ExcelDAO {
 
 
 }
+
+
+
