@@ -8,13 +8,14 @@
 
 在target目录中找到jar包(名字为maven_springboot-0.0.1-SNAPSHOT.jar)
 
-在你的MySQL中，创建一个 名为 excel 的数据库
-
+ 配置数据库连接(见下)
 
 进入jar所在的文件夹，使用java -jar命令运行jar，项目就能启动(自行配置环境)
 
 进入如下页面,可进行文档的添加或下载
 localhost:8080/myexcel  
+
+
 
 
 添加excel可能遇见的错误: <br>
@@ -38,6 +39,15 @@ localhost:8080/myexcel
          
  架构：<br>
  本项目采用传统的springboot框架,control层、service层、dao层经典架构<br>
+ 
+   数据库配置：<br>
+     
+     在src/main/resources/application.yml 配置数据库连接
+     url处设置你的数据库名称
+     root处设置用户名
+     password处设置密码
+     请确保填写正确，否则无法连接上您的数据库！
+   
           
    control层：<br>
    
